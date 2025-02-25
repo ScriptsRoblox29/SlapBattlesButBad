@@ -177,7 +177,7 @@ local Button = aimbotTab:CreateButton({
 })
 
 
-local Button = Tab:CreateButton({
+local Button = aimbotTab:CreateButton({
    Name = "Get all Slapple",
    Callback = function()
        local player = game.Players.LocalPlayer
