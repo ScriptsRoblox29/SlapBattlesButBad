@@ -79,7 +79,7 @@ local Window = Rayfield:CreateWindow({
 
 
 local Button = aimbotTab:CreateButton({
-   Name = "Slap aura (click me again if all players die or some)",
+   Name = "Slap aura (bugged)",
    Callback = function()
        for _, player in ipairs(game.Players:GetPlayers()) do
            if player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
@@ -89,8 +89,39 @@ local Button = aimbotTab:CreateButton({
        end
    end,
 })
- 
- 
+
+ local Button = aimbotTab:CreateButton({
+   Name = "TP to lobby",
+   Callback = function()
+       local player = game.Players.LocalPlayer
+       if player then
+           player.Character:SetPrimaryPartCFrame(CFrame.new(-41.980438232421875, 644.3502807617188, -285.6496887207031))
+       end
+   end,
+})
+
+
+ local Button = aimbotTab:CreateButton({
+   Name = "TP to cannon island",
+   Callback = function()
+       local player = game.Players.LocalPlayer
+       if player then
+           player.Character:SetPrimaryPartCFrame(CFrame.new(313.801605, 212.306824, 83.6384201, 0.551201403, 0, 0.834372222, -0, 1, -0, -0.834372222, 0, 0.551201403))
+       end
+   end,
+})
+
+
+ local Button = aimbotTab:CreateButton({
+   Name = "TP to Area",
+   Callback = function()
+       local player = game.Players.LocalPlayer
+       if player then
+           player.Character:SetPrimaryPartCFrame(CFrame.new(24.730520248413086, 200.04953002929688, -218.87469482421875))
+       end
+   end,
+})
+
  
  local visualsTab = Window:CreateTab("Visuals", "crosshair")
  
