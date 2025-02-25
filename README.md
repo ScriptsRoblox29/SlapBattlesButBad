@@ -178,68 +178,60 @@ local Button = aimbotTab:CreateButton({
 
 
 local Button = aimbotTab:CreateButton({
-   Name = "Get all Slapple",
+   Name = "Button Example",
    Callback = function()
        local player = game.Players.LocalPlayer
        if not player or not player.Character or not player.Character:FindFirstChild("HumanoidRootPart") then return end
 
        local humanoidRootPart = player.Character.HumanoidRootPart
 
-       -- Folder names inside the FruitGloves model
-       local fruitGlovesModelName = "FruitGloves" -- The model name
-       local applesFolderName = "apples" -- Folder containing Slapple and BigSlapple
-       local folderName = "Folder" -- Folder containing greyslapple
-       local waterappleFolderName = "waterapple" -- Folder containing water
+       local fruitGlovesModelName = "FruitGloves"
+       local applesFolderName = "apples"
+       local folderName = "Folder"
+       local waterappleFolderName = "waterapple"
 
-       -- Allowed item names !
        local allowedNames = { "slanana", "BigSlapple", "Slapple", "greyslapple", "water" }
        local teleportedObjects = {}
 
-       -- Save the player's position before teleporting
        local originalPosition = humanoidRootPart.CFrame
 
-       -- Find the FruitGloves model
        local fruitGlovesModel = workspace:FindFirstChild(fruitGlovesModelName)
        local applesFolder = fruitGlovesModel and fruitGlovesModel:FindFirstChild(applesFolderName)
        local folder = fruitGlovesModel and fruitGlovesModel:FindFirstChild(folderName)
        local waterappleFolder = fruitGlovesModel and fruitGlovesModel:FindFirstChild(waterappleFolderName)
 
        task.spawn(function()
-           -- Teleport to items in the apples folder
            if applesFolder then
                for _, item in ipairs(applesFolder:GetDescendants()) do
-                   if (item:IsA("Part") or item:IsA("MeshPart") or item:IsA("UnionOperation")) and table.find(allowedNames, item.Name) and not teleportedObjects[item] then
-                       humanoidRootPart.CFrame = item.CFrame
+                   if item:IsA("Model") and table.find(allowedNames, item.Name) and not teleportedObjects[item] then
+                       humanoidRootPart.CFrame = item.PrimaryPart.CFrame
                        teleportedObjects[item] = true
                        task.wait(0.75)
                    end
                end
            end
 
-           -- Teleport to items in the Folder
            if folder then
                for _, item in ipairs(folder:GetDescendants()) do
-                   if (item:IsA("Part") or item:IsA("MeshPart") or item:IsA("UnionOperation")) and table.find(allowedNames, item.Name) and not teleportedObjects[item] then
-                       humanoidRootPart.CFrame = item.CFrame
+                   if item:IsA("Model") and table.find(allowedNames, item.Name) and not teleportedObjects[item] then
+                       humanoidRootPart.CFrame = item.PrimaryPart.CFrame
                        teleportedObjects[item] = true
                        task.wait(0.75)
                    end
                end
            end
 
-           -- Teleport to items in the waterapple folder
            if waterappleFolder then
                for _, item in ipairs(waterappleFolder:GetDescendants()) do
-                   if (item:IsA("Part") or item:IsA("MeshPart") or item:IsA("UnionOperation")) and table.find(allowedNames, item.Name) and not teleportedObjects[item] then
-                       humanoidRootPart.CFrame = item.CFrame
+                   if item:IsA("Model") and table.find(allowedNames, item.Name) and not teleportedObjects[item] then
+                       humanoidRootPart.CFrame = item.PrimaryPart.CFrame
                        teleportedObjects[item] = true
-                       task.wait(0.75)
+                       task.wait(0.1)
                    end
                end
            end
 
-           -- After collecting all objects, wait 3 seconds and return to the original position
-           task.wait(3)
+           task.wait(1)
            humanoidRootPart.CFrame = originalPosition
        end)
    end,
