@@ -47,7 +47,7 @@ local Window = Rayfield:CreateWindow({
  
  
  local Button = aimbotTab:CreateButton({
-   Name = "Button Example",
+   Name = "Anti-Void",
    Callback = function()
        local part = Instance.new("Part")
        part.Size = Vector3.new(2048, 2, 2048)
@@ -58,7 +58,37 @@ local Window = Rayfield:CreateWindow({
        part.Parent = workspace
    end,
 })
- 
+
+
+ local Button = aimbotTab:CreateButton({
+   Name = "Safe zone for badges",
+   Callback = function()
+       local part = Instance.new("Part")
+       part.Size = Vector3.new(30, 2, 30)
+       part.Position = Vector3.new(5911.56787, 701.383789, -8281.13477)
+       part.Anchored = true
+       part.CanCollide = true
+       part.Parent = workspace
+
+       local player = game.Players.LocalPlayer
+       if player then
+           player.Character:SetPrimaryPartCFrame(CFrame.new(5911.56787, 701.383789, -8281.13477))
+       end
+   end,
+})
+
+
+local Button = aimbotTab:CreateButton({
+   Name = "Slap aura (click me again if all players die or some)",
+   Callback = function()
+       for _, player in ipairs(game.Players:GetPlayers()) do
+           if player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
+               local humanoidRootPart = player.Character.HumanoidRootPart
+               humanoidRootPart.Size = Vector3.new(45, 45, 45)
+           end
+       end
+   end,
+})
  
  
  
@@ -77,6 +107,9 @@ local Window = Rayfield:CreateWindow({
  })
  
 
+local playerTab = Window:CreateTab("Player", "crosshair")
+ 
+ local Section = playerTab:CreateSection("I think you already know")
 
  
   local Slider = playerTab:CreateSlider({
