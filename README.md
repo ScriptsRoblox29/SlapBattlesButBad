@@ -18,7 +18,7 @@ local Window = Rayfield:CreateWindow({
     },
  
  
-    KeySystem = false, -- Set this to true to use our key system
+    KeySystem = true, -- Set this to true to use our key system
     KeySettings = {
        Title = "Key",
        Subtitle = "Key System",
@@ -26,7 +26,7 @@ local Window = Rayfield:CreateWindow({
        FileName = "skibidi key", -- It is recommended to use something unique as other scripts using Rayfield may overwrite your key file
        SaveKey = true, -- The user's key will be saved, but if you change the key, they will be unable to use your script
        GrabKeyFromSite = false, -- If this is true, set Key below to the RAW site you would like Rayfield to get the key from
-       Key = {"Key_9120", "Key_4045"} -- List of keys that will be accepted by the system, can be RAW file links (pastebin, github etc) or simple strings ("hello","key22")
+       Key = {"Key_9120"} -- List of keys that will be accepted by the system, can be RAW file links (pastebin, github etc) or simple strings ("hello","key22")
     }
  }) 
  
@@ -72,7 +72,7 @@ local Window = Rayfield:CreateWindow({
 
        local player = game.Players.LocalPlayer
        if player then
-           player.Character:SetPrimaryPartCFrame(CFrame.new(5911.56787, 701.383789, -8281.13477))
+           player.Character:SetPrimaryPartCFrame(CFrame.new(5911.400390625, 716.906982421875, -8279.2646484375))
        end
    end,
 })
