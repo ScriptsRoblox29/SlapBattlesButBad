@@ -149,6 +149,33 @@ local Button = aimbotTab:CreateButton({
    end,
 })
 
+
+local Button = aimbotTab:CreateButton({
+   Name = "Get all items",
+   Callback = function()
+       local player = game.Players.LocalPlayer
+       if not player or not player.Character or not player.Character:FindFirstChild("HumanoidRootPart") then return end
+
+       local humanoidRootPart = player.Character.HumanoidRootPart
+       local toolsTeleported = {}
+
+       task.spawn(function()
+           for _, tool in ipairs(workspace:GetDescendants()) do
+               if tool:IsA("Tool") and not tool.Parent:IsA("Player") and not toolsTeleported[tool] then
+                   humanoidRootPart.CFrame = tool.Handle.CFrame
+                   toolsTeleported[tool] = true
+                   task.wait(0.1)
+                   
+                   local prompt = tool:FindFirstChildOfClass("ProximityPrompt")
+                   if prompt then
+                       fireproximityprompt(prompt)
+                   end
+               end
+           end
+       end)
+   end,
+})
+
  
  local visualsTab = Window:CreateTab("Visuals", "crosshair")
  
