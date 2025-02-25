@@ -65,7 +65,7 @@ local Window = Rayfield:CreateWindow({
    Callback = function()
        local part = Instance.new("Part")
        part.Size = Vector3.new(30, 2, 30)
-       part.Position = Vector3.new(5911.56787, 701.383789, -8281.13477)
+       part.Position = Vector3.new(5912.072265625, 705.3837280273438, -8280.7998046875)
        part.Anchored = true
        part.CanCollide = true
        part.Parent = workspace
@@ -122,6 +122,33 @@ local Button = aimbotTab:CreateButton({
    end,
 })
 
+
+local Button = aimbotTab:CreateButton({
+   Name = "Slap all (click on the screen)",
+   Callback = function()
+       local player = game.Players.LocalPlayer
+       if not player or not player.Character or not player.Character:FindFirstChild("HumanoidRootPart") then return end
+
+       local humanoidRootPart = player.Character.HumanoidRootPart
+       local playersTeleported = {}
+
+       task.spawn(function()
+           for _, targetPlayer in ipairs(game.Players:GetPlayers()) do
+               if game.Players:FindFirstChild(targetPlayer.Name) and 
+                  targetPlayer ~= player and 
+                  targetPlayer.Character and 
+                  targetPlayer.Character:FindFirstChild("HumanoidRootPart") and 
+                  not playersTeleported[targetPlayer.Name] then
+
+                   humanoidRootPart.CFrame = targetPlayer.Character.HumanoidRootPart.CFrame
+                   playersTeleported[targetPlayer.Name] = true
+                   task.wait(0.75)
+               end
+           end
+       end)
+   end,
+})
+
  
  local visualsTab = Window:CreateTab("Visuals", "crosshair")
  
@@ -142,6 +169,16 @@ local playerTab = Window:CreateTab("Player", "crosshair")
  
  local Section = playerTab:CreateSection("I think you already know")
 
+
+local Toggle = playerTab:CreateToggle({
+    Name = "activate Speed",
+    CurrentValue = false,
+    Flag = "Toggle1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+    Callback = function(Value)
+        getgenv().speed.enabled = Value
+    end,
+ })
+ 
  
   local Slider = playerTab:CreateSlider({
     Name = "Speed",
