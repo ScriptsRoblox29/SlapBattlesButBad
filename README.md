@@ -191,7 +191,7 @@ local Button = aimbotTab:CreateButton({
        local folderName = "Folder" -- Folder containing greyslapple
        local waterappleFolderName = "waterapple" -- Folder containing water
 
-       -- Allowed item names
+       -- Allowed item names !
        local allowedNames = { "slanana", "BigSlapple", "Slapple", "greyslapple", "water" }
        local teleportedObjects = {}
 
